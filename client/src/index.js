@@ -9,6 +9,16 @@ import { SearchProvider } from "./context/search";
 import { AuthProvider } from "./context/auth"; //context api
 import { CartProvider } from "./context/cart";
 
+if (process.env.NODE_ENV !== "production") {
+  void import("@reticlehq/react").then(({ reticle, install }) => {
+    install();
+    reticle.connect({
+      projectId: "ecommerce-website-59518a00",
+      token: process.env.REACT_APP_RETICLE_TOKEN,
+    });
+  });
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>

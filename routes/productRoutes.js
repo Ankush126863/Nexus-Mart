@@ -21,6 +21,7 @@ import formidable from "express-formidable";
 const router = express.Router();
 
 //create product
+
 router.post(
   "/create-product",
   requireSignIn,
@@ -37,6 +38,13 @@ router.put(
     formidable(),
     updateProductController
   );
+// router.put(
+//     "/update-product/:pid",
+//     requireSignIn,
+//     isAdmin,
+//     formidable(),
+//     updateProductController
+//   );
 //get all product
 router.get("/get-product", getProductController);
 

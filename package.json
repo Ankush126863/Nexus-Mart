@@ -27,5 +27,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@reticlehq/react": "^2.12.0"
   }
 }
