@@ -1,15 +1,15 @@
 {
   "counts": {
-    "calls": 12,
-    "verdicts": 3,
-    "passed": 2,
+    "calls": 53,
+    "verdicts": 5,
+    "passed": 4,
     "failed": 1,
     "unknown": 0,
     "refusals": 0,
     "marks": 0,
-    "sessions": 6,
-    "tokensReturned": 7413,
-    "drivingMs": 48178
+    "sessions": 13,
+    "tokensReturned": 13761,
+    "drivingMs": 145447
   },
   "days": [
     {
@@ -30,22 +30,22 @@
     {
       "date": "2026-08-29",
       "counts": {
-        "calls": 6,
-        "verdicts": 3,
-        "passed": 2,
+        "calls": 47,
+        "verdicts": 5,
+        "passed": 4,
         "failed": 1,
         "unknown": 0,
         "refusals": 0,
         "marks": 0,
-        "sessions": 6,
-        "tokensReturned": 3012,
-        "drivingMs": 7984
+        "sessions": 13,
+        "tokensReturned": 9360,
+        "drivingMs": 105253
       }
     }
   ],
   "records": {
-    "longestRunMs": 0,
-    "bestVerdictDay": 3,
+    "longestRunMs": 361733,
+    "bestVerdictDay": 5,
     "bestDefectDay": 1,
     "streakDays": 2,
     "bestStreakDays": 2

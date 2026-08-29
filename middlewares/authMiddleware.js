@@ -4,19 +4,27 @@ import userModel from "../models/userModel.js";
 //Protected Routes token base
 export const requireSignIn = async(req,res,next) =>{
     try {
-        console.log(req.headers.authorization);
-         const token = req.headers.authorization.split(" ")[1];
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            return res.status(401).send({
+                success: false,
+                message: "Authorization header missing",
+            });
+        }
+        const token = authHeader.startsWith("Bearer ")
+            ? authHeader.split(" ")[1]
+            : authHeader;
         
-         const decode = JWT.verify(token, process.env.JWT_SECRET);
+        const decode = JWT.verify(token, process.env.JWT_SECRET);
         req.user = decode;
         next();
     }  catch (error) {
-    console.log(error);
-    res.status(401).send({
-      success: false,
-      message: "Invalid or Expired Token",
-    });
-  }
+        console.log(error);
+        res.status(401).send({
+            success: false,
+            message: "Invalid or Expired Token",
+        });
+    }
 }
 
 //admin access
