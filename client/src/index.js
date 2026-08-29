@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== "production") {
     install();
     reticle.connect({
       projectId: "ecommerce-website-59518a00",
-      token: process.env.REACT_APP_RETICLE_TOKEN,
+      token: process.env.REACT_APP_RETICLE_TOKEN || "0dcced254a1f5b9391fd98089247a8c702169fc104904c1f",
     });
   });
 }

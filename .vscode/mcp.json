@@ -1,8 +1,10 @@
 {
   "servers": {
     "reticle": {
-      "command": "npx",
+      "command": "cmd",
       "args": [
+        "/c",
+        "npx",
         "@reticlehq/server",
         "mcp"
       ]
