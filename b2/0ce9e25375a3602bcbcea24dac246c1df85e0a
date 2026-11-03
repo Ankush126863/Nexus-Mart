@@ -1,0 +1,23 @@
+server.js
+  h_c73f7d0636c038 10,30
+routes/orderRoutes.js
+  h_c73f7d0636c038 1-11
+.env
+  h_c73f7d0636c038 5-7
+client/src/pages/user/Orders.js
+  h_c73f7d0636c038 2-6,9-42,44-47,50-51,53-89,93-94,96
+controllers/productController.js
+  h_c73f7d0636c038 317,320-321,328-336,338-342,344-349,351-361,365,369,371
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "autter_version": "2.2.0",
+  "base_commit_sha": "b20ce9e25375a3602bcbcea24dac246c1df85e0a",
+  "branch": "main",
+  "prompts": {},
+  "humans": {
+    "h_c73f7d0636c038": {
+      "author": "Ankush Yadav <ankush.yadav.ug22@nsut.ac.in>"
+    }
+  }
+}
