@@ -314,48 +314,58 @@ export const productCategoryController = async(req,res) =>{
 //token
 export const braintreeTokenController = async (req, res) => {
   try {
-    gateway.clientToken.generate({}, function (err, response) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send(response);
-      }
-    });
+    const response = await gateway.clientToken.generate({});
+    res.send(response);
   } catch (error) {
-    console.log(error);
+    console.log("Braintree token error:", error.type, error.message);
+    res.status(500).send({ success: false, message: error.message });
   }
 };
-
 //payment
 export const brainTreePaymentController = async (req, res) => {
   try {
     const { nonce, cart } = req.body;
+    if (!nonce || !Array.isArray(cart) || cart.length === 0) {
+      return res.status(400).send({ success: false, message: "Invalid request" });
+    }
+
+    // Prices from the DB, never from the client
+    const ids = cart.map((i) => i._id);
+    const dbProducts = await productModel.find({ _id: { $in: ids } }).select("price");
+    const priceById = new Map(dbProducts.map((p) => [String(p._id), p.price]));
+
     let total = 0;
-    cart.map((i) => {
-      total += i.price;
-    });
-    let newTransaction = gateway.transaction.sale(
-      {
-        amount: total,
-        paymentMethodNonce: nonce,
-        options: {
-          submitForSettlement: true,
-        },
-      },
-      function (error, result) {
-        if (result) {
-          const order = new orderModel({
-            products: cart,
-            payment: result,
-            buyer: req.user._id,
-          }).save();
-          res.json({ ok: true });
-        } else {
-          res.status(500).send(error);
-        }
+    for (const item of cart) {
+      const price = priceById.get(String(item._id));
+      if (price === undefined) {
+        return res.status(400).send({ success: false, message: "Invalid product in cart" });
       }
-    );
+      total += price;
+    }
+
+    const result = await gateway.transaction.sale({
+      amount: total.toFixed(2),
+      paymentMethodNonce: nonce,
+      options: { submitForSettlement: true },
+    });
+
+    if (!result.success) {
+      return res.status(400).send({ success: false, message: result.message });
+    }
+
+    await new orderModel({
+      products: ids,
+      payment: {
+        id: result.transaction.id,
+        status: result.transaction.status,
+        amount: result.transaction.amount,
+      },
+      buyer: req.user._id,
+    }).save();
+
+    res.json({ ok: true });
   } catch (error) {
     console.log(error);
+    res.status(500).send({ success: false, message: "Payment failed", error: error.message });
   }
-};
+};;

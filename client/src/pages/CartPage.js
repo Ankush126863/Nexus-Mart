@@ -14,6 +14,7 @@ const CartPage = () => {
   const [clientToken , setClientToken] = useState("");
   const [instance ,setInstance ] = useState("");
   const [loading,setLoading]= useState(false);
+  const [isRequestable, setIsRequestable] = useState(false);
   const navigate = useNavigate();
   
   //total price
@@ -61,7 +62,7 @@ const CartPage = () => {
  const handlePayment = async () => {
   try {
     setLoading(true);
-    const {nonce} = await instance.requestPaymentMathod();
+    const {nonce} = await instance.requestPaymentMethod();
     const {data} = await axios.post('/api/v1/product/braintree/payment',{
       nonce,cart
     })
@@ -73,6 +74,7 @@ const CartPage = () => {
   } catch (error) {
     console.log(error);
     setLoading(false);
+    toast.error(error?.message || "Payment failed. Please try again.");
   }
  }
   return (
@@ -95,7 +97,7 @@ const CartPage = () => {
         <div className="row">
           <div className="col-md-8">
             {cart?.map((p) => (
-              <div className="row mb-2 p-3 card flex-row">
+              <div className="row mb-2 p-3 card flex-row" key={p._id}>
                 <div className="col-md-4">
                   <img
                     src={`/api/v1/product/product-photo/${p._id}`}
@@ -159,17 +161,16 @@ const CartPage = () => {
                   <DropIn
                     options={{
                       authorization: clientToken,
-                      paypal: {
-                        flow: "vault",
-                      },
                     }}
                     onInstance={(instance) => setInstance(instance)}
+                    onPaymentMethodRequestable={() => setIsRequestable(true)}
+                    onNoPaymentMethodRequestable={() => setIsRequestable(false)}
                   />
 
                   <button
                     className="btn btn-primary"
                     onClick={handlePayment}
-                    disabled={loading || !instance || !auth?.user?.address}
+                    disabled={loading || !instance || !isRequestable || !auth?.user?.address}
                   >
                     {loading ? "Processing ...." : "Make Payment"}
                   </button>
