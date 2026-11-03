@@ -8,6 +8,9 @@ import cors from "cors"
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
+import dns from "dns";
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 // configure env
 dotenv.config();
