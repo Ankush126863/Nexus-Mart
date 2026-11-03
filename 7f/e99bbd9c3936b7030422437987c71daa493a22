@@ -1,0 +1,13 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "autter_version": "2.2.0",
+  "base_commit_sha": "7fe99bbd9c3936b7030422437987c71daa493a22",
+  "branch": "main",
+  "prompts": {},
+  "humans": {
+    "h_c73f7d0636c038": {
+      "author": "Ankush Yadav <ankush.yadav.ug22@nsut.ac.in>"
+    }
+  }
+}
