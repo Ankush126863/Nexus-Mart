@@ -1,0 +1,15 @@
+server.js
+  h_c73f7d0636c038 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "autter_version": "2.2.0",
+  "base_commit_sha": "8483bcaf0af816f9a5d58d89e6caa75f499cc430",
+  "branch": "main",
+  "prompts": {},
+  "humans": {
+    "h_c73f7d0636c038": {
+      "author": "Ankush Yadav <ankush.yadav.ug22@nsut.ac.in>"
+    }
+  }
+}
