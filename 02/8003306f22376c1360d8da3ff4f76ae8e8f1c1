@@ -1,0 +1,15 @@
+client/public/_redirects
+  h_c73f7d0636c038 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "autter_version": "2.2.0",
+  "base_commit_sha": "028003306f22376c1360d8da3ff4f76ae8e8f1c1",
+  "branch": "main",
+  "prompts": {},
+  "humans": {
+    "h_c73f7d0636c038": {
+      "author": "Ankush Yadav <ankush.yadav.ug22@nsut.ac.in>"
+    }
+  }
+}
